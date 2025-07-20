@@ -6,35 +6,41 @@ const vendorSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-    email: {
+  email: {
     type: String,
-    required: true, 
+    required: true,
     unique: true,
-    trim: true, 
+    trim: true,
   },
-    password: {
+  password: {
     type: String,
-    required: true, 
+    required: true,
     //minlength: 6,
   },
-//     phone: {
-//     type: String,
-//     required: true,
-//     trim: true,
-//   },
-//     address: {  
-//     type: String,
-//     required: true,
-//     trim: true,
-//   },
-//     createdAt: {
-//     type: Date,
-//     default: Date.now,
-//   },
-//     updatedAt: {
-//         type: Date,
-//         default: Date.now,
-//     },
+  firm: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Firm',
+    }
+  ]
+  //     phone: {
+  //     type: String,
+  //     required: true,
+  //     trim: true,
+  //   },
+  //     address: {  
+  //     type: String,
+  //     required: true,
+  //     trim: true,
+  //   },
+  //     createdAt: {
+  //     type: Date,
+  //     default: Date.now,
+  //   },
+  //     updatedAt: {
+  //         type: Date,
+  //         default: Date.now,
+  //     },
 });
 
 const Vendor = mongoose.model('Vendor', vendorSchema);

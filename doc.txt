@@ -1,0 +1,28 @@
+https://www.youtube.com/watch?v=A-FXkEtPJmc&list=PLZca26lQcxTpdqauaMFxhfIB1MBv1TUcB
+
+node -v
+
+git -v
+
+npm -v
+
+mkdir suby
+cd suby
+
+mkdir backend
+mkdir dashboard
+
+cd backend
+
+npm init -y
+
+npm install express mongoose dotenv body-parser nodemon
+
+mongodb+srv://tejuharsha1024:Qgw1aRBgIU9U96sJ@cluster0.jsnjdc0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+mongodb+srv://tejuharsha1024:Qgw1aRBgIU9U96sJ@cluster0.jsnjdc0.mongodb.net/
+
+npm run dev
+
+npm install jsonwebtoken bcryptjs
+

@@ -2,6 +2,11 @@ const Vendor = require('../models/Vendor');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
+const secretkey = process.env.JWT_SECRET;
+
 const vendorRegister = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -28,7 +33,42 @@ const vendorRegister = async (req, res) => {
   }
 };
 
+const vendorLogin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Find vendor by email
+    const vendor = await Vendor.findOne({ email });
+    // if (!vendor) {  
+    //   return res.status(400).json({ message: 'Vendor not found' });
+    // }
+    // Check password
+    const isPasswordValid = await bcrypt.compare(password, vendor.password);
+    // if (!isPasswordValid) {
+    //   return res.status(400).json({ message: 'Invalid password' });
+    // }
+
+    if(!vendor || !isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    // res.status(200).json({ message: 'Vendor logged in successfully' });
+    // console.log('Vendor logged in successfully:', vendor.username);
+
+    // Generate JWT token
+    const token = jwt.sign({ vendorId: vendor._id }, secretkey, {  
+      expiresIn: '1h',
+    });
+    res.status(200).json({ sucess: "Login Successful", token, vendorId: vendor._id });
+    console.log('Vendor logged in successfully:', token);
+  } catch (error) {
+    console.error('Error logging in vendor:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 module.exports = {
   vendorRegister,
+  vendorLogin,
 };
 

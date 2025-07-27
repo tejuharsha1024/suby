@@ -40,6 +40,6 @@ app.use('/', (req, res) => {
   res.send('<h1>Welcome to the SUBY!</h1>');
 });
 
-app.use('/home', (req, res) => {
-  res.send('<h1>Welcome to the SUBY Home Page!</h1>');
+app.use('/about', (req, res) => {
+  res.send('<h1>Welcome to the SUBY About Page!</h1>');
 });

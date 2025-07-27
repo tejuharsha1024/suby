@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const vendorRoutes = require('./routes/vendorRoutes');
 const bodyParser = require('body-parser');
+const firmRoutes = require('./routes/firmRoutes');
 
 const app = express();
 
@@ -23,6 +24,7 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/vendor', vendorRoutes);
+app.use('/firm', firmRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

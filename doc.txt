@@ -26,3 +26,5 @@ npm run dev
 
 npm install jsonwebtoken bcryptjs
 
+npm install multer
+

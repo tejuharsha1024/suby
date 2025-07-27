@@ -24,7 +24,7 @@ const firmSchema = new mongoose.Schema({
         type: [
             {
                 type: String,
-                enum: ['south-indain', 'north-indian', 'chinese', 'italian', 'mexican', 'continental'],
+                enum: ['south-indian', 'north-indian', 'chinese', 'italian', 'mexican', 'continental'],
             },
         ]
     },
@@ -39,6 +39,12 @@ const firmSchema = new mongoose.Schema({
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Vendor',
+        }
+    ],
+    product: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product',
         }
     ]
 });

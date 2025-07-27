@@ -51,7 +51,11 @@ const addFirm = async (req, res) => {
         await newFirm.save();
 
         // Optionally, you can also update the Vendor model to include this firm
-        await Vendor.findByIdAndUpdate(vendorId, { $push: { firms: newFirm._id } });
+        // await Vendor.findByIdAndUpdate(vendor._id, { $push: { firms: newFirm._id } });
+
+        vendor.firm.push(newFirm);
+
+        await vendor.save(); // Save the updated vendor
 
         res.status(201).json({ message: 'Firm added successfully', firm: newFirm });
     } catch (error) {
@@ -60,6 +64,26 @@ const addFirm = async (req, res) => {
     }
 }
 
+const deleteFirmById = async (req, res) => {
+    try {
+        const firmId = req.params.firmId;
+        const firm = await Firm.findByIdAndDelete(firmId);
+
+        if (!firm) {
+            return res.status(404).json({ error: 'Firm not found' });
+        }
+
+        // Optionally, remove the firm reference from the vendor
+        await Vendor.findByIdAndUpdate(firm.vendor, { $pull: { firm: firm._id } });
+
+        res.status(200).json({ message: 'Firm deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting firm:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}   
+
 module.exports = {
     addFirm: [upload.single('image'), addFirm], // Use multer middleware to handle file upload    
+    deleteFirmById
 };

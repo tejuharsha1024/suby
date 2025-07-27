@@ -1,11 +1,12 @@
 const express = require('express');
-const firmController = require('../controllers/firmController');
+const productController = require('../controllers/productController');
 const verifyToken = require('../middleware/verifyToken');
 const multer = require('multer');
 
 const router = express.Router();
-
-router.post('/add-firm', verifyToken, firmController.addFirm); // Use verifyToken middleware to protect the route
+//router.post('/add-product/:firmId', verifyToken, productController.addProduct); // Use verifyToken middleware to protect the route
+router.post('/add-product/:firmId', productController.addProduct); // Use verifyToken middleware to protect the route
+router.get('/:firmId/products', productController.getProductByFirm); // Route to get products by firm ID
 
 router.get('uploads/:imageName', (req, res) => {
   const imageName = req.params.imageName;
@@ -20,7 +21,6 @@ router.get('uploads/:imageName', (req, res) => {
     });
 });
 
-//router.delete('/:firmId', verifyToken, firmController.deleteFirmById); // Route to delete a firm by ID
-router.delete('/:firmId', firmController.deleteFirmById); // Route to delete a firm by ID
+router.delete('/:productId', productController.deleteProductById); // Route to delete a product by ID
 
 module.exports = router;

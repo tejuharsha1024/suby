@@ -30,3 +30,17 @@ npm install multer
 
 npm install cors
 
+//Front end
+
+cd react_dashboard
+
+// npm create-react-app //deprecated
+
+npm create vite@latest
+
+cd dashboard
+
+npm install
+
+npm run dev
+
